@@ -8,6 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -35,7 +36,16 @@ public class UserController {
 
     @PostMapping(value = "/login")
     @ResponseBody
-    public void login(@RequestBody User user) {
+    public User login(@RequestBody User user, HttpSession session) {
+        session.setAttribute("user", user.getId());
         userService.login(user);
+        return user;
     }
+
+    @GetMapping(value = "/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return session.getAttribute("logged").toString();
+    }
+
 }
