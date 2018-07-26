@@ -27,8 +27,9 @@ public class UserRepositoryImpl implements UserRepository {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             user = session.get(User.class, id);
-            user.getFavorites().size();
-            user.getWatchlist().size();
+            user.getFavorites();
+            user.getWatchlist();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());

@@ -5,7 +5,6 @@ import com.quicksilver.quicksilver.services.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -20,9 +19,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public User getById(@PathVariable(name = "id") String id) {
-        int parsedId = Integer.parseInt(id);
-        return userService.findById(parsedId);
+    public User getById(@PathVariable(name = "id") int id) {
+        User user = userService.findById(id);
+        System.out.println(user.getFavorites().size());
+        return user;
     }
 
     @PostMapping(value = "/signup")

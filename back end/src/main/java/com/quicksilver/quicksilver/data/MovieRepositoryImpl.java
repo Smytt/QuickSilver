@@ -27,8 +27,9 @@ public class MovieRepositoryImpl implements MovieRepository {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             movie = session.get(Movie.class, id);
-            movie.getFavedBy().size();
-            movie.getInWatchlistOf().size();
+            movie.getFavedBy();
+            movie.getInWatchlistOf();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());

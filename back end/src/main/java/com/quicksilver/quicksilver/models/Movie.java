@@ -1,15 +1,17 @@
 package com.quicksilver.quicksilver.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.quicksilver.quicksilver.serializers.MovieSerializer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "movies")
+@JsonSerialize(using = MovieSerializer.class)
 public class Movie {
 
     @Id
@@ -28,23 +30,21 @@ public class Movie {
     @Column(name = "year")
     private int year;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    @JsonManagedReference
-    private List<User> favedBy;
+    private Set<User> favedBy;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "watchlist",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    @JsonManagedReference
-    private List<User> inWatchlistOf;
+    private Set<User> inWatchlistOf;
 
     public Movie() {
 
@@ -90,19 +90,19 @@ public class Movie {
         this.year = year;
     }
 
-    public List<User> getFavedBy() {
+    public Set<User> getFavedBy() {
         return favedBy;
     }
 
-    public void setFavedBy(List<User> favedBy) {
+    public void setFavedBy(Set<User> favedBy) {
         this.favedBy = favedBy;
     }
 
-    public List<User> getInWatchlistOf() {
+    public Set<User> getInWatchlistOf() {
         return inWatchlistOf;
     }
 
-    public void setInWatchlistOf(List<User> inWatchlistOf) {
+    public void setInWatchlistOf(Set<User> inWatchlistOf) {
         this.inWatchlistOf = inWatchlistOf;
     }
 }

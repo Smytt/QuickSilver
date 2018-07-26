@@ -1,15 +1,17 @@
 package com.quicksilver.quicksilver.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.quicksilver.quicksilver.serializers.UserSerializer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@JsonSerialize(using = UserSerializer.class)
 public class User {
 
     @Id
@@ -22,23 +24,21 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    @JsonManagedReference
-    private List<Movie> favorites;
+    private Set<Movie> favorites;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "watchlist",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    @JsonManagedReference
-    private List<Movie> watchlist;
+    private Set<Movie> watchlist;
 
 
     public User() {
@@ -69,19 +69,19 @@ public class User {
         this.password = password;
     }
 
-    public List<Movie> getFavorites() {
+    public Set<Movie> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(List<Movie> favorites) {
+    public void setFavorites(Set<Movie> favorites) {
         this.favorites = favorites;
     }
 
-    public List<Movie> getWatchlist() {
+    public Set<Movie> getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(List<Movie> watchlist) {
+    public void setWatchlist(Set<Movie> watchlist) {
         this.watchlist = watchlist;
     }
 }

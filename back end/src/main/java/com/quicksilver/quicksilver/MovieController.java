@@ -21,9 +21,11 @@ public class MovieController {
     }
 
     @GetMapping(value = "/{id}")
-    public Movie getById(@PathVariable(name = "id") String id) {
-        int parsedId = Integer.parseInt(id);
-        return movieService.findById(parsedId);
+    public Movie getById(@PathVariable(name = "id") int id) {
+//        int parsedId = Integer.parseInt(id);
+        Movie movie = movieService.findById(id);
+        System.out.println(movie.getFavedBy().size());
+        return movie;
     }
 
 }
