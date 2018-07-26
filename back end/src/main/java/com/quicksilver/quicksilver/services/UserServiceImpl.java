@@ -1,6 +1,7 @@
 package com.quicksilver.quicksilver.services;
 
-import com.quicksilver.quicksilver.data.UserRepository;
+import com.quicksilver.quicksilver.data.base.GenericRepository;
+import com.quicksilver.quicksilver.data.base.UserRepository;
 import com.quicksilver.quicksilver.models.User;
 import com.quicksilver.quicksilver.services.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserServiceImpl(UserRepository genericRepository) {
+        this.userRepository = genericRepository;
     }
 
     @Override
-    public User getById(int id) {
-        return userRepository.getById(id);
+    public User findById(int id) {
+        return userRepository.findById(id);
     }
 
     @Override
@@ -29,10 +30,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login(User user) {
-        User dbUser = userRepository.getByUsername(user.getUsername());
+    public User login(User user) {
+        User dbUser = userRepository.findByUsername(user.getUsername());
         if(Objects.equals(dbUser.getPassword(), user.getPassword())) {
             System.out.println("logged");
         }
+
+        return dbUser;
     }
 }

@@ -1,5 +1,6 @@
 package com.quicksilver.quicksilver.config;
 
+import com.quicksilver.quicksilver.models.Movie;
 import com.quicksilver.quicksilver.models.User;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ public class AppConfig {
         return new org.hibernate.cfg.Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Movie.class)
                 .buildSessionFactory();
     }
 }

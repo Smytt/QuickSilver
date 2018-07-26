@@ -3,8 +3,6 @@ package com.quicksilver.quicksilver;
 import com.quicksilver.quicksilver.models.User;
 import com.quicksilver.quicksilver.services.base.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
@@ -24,7 +22,7 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public User getById(@PathVariable(name = "id") String id) {
         int parsedId = Integer.parseInt(id);
-        return userService.getById(parsedId);
+        return userService.findById(parsedId);
     }
 
     @PostMapping(value = "/signup")
@@ -36,10 +34,8 @@ public class UserController {
 
     @PostMapping(value = "/login")
     @ResponseBody
-    public User login(@RequestBody User user, HttpSession session) {
-        session.setAttribute("user", user.getId());
-        userService.login(user);
-        return user;
+    public User login(@RequestBody User user) {
+        return userService.login(user);
     }
 
     @GetMapping(value = "/logout")

@@ -1,9 +1,12 @@
 package com.quicksilver.quicksilver.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -25,21 +28,23 @@ public class Movie {
     @Column(name = "year")
     private int year;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private ArrayList<User> favedBy;
+    @JsonManagedReference
+    private List<User> favedBy;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "watchlist",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private ArrayList<User> inWatchlistOf;
+    @JsonManagedReference
+    private List<User> inWatchlistOf;
 
     public Movie() {
 
@@ -85,19 +90,19 @@ public class Movie {
         this.year = year;
     }
 
-    public ArrayList<User> getFavedBy() {
+    public List<User> getFavedBy() {
         return favedBy;
     }
 
-    public void setFavedBy(ArrayList<User> favedBy) {
+    public void setFavedBy(List<User> favedBy) {
         this.favedBy = favedBy;
     }
 
-    public ArrayList<User> getInWatchlistOf() {
+    public List<User> getInWatchlistOf() {
         return inWatchlistOf;
     }
 
-    public void setInWatchlistOf(ArrayList<User> inWatchlistOf) {
+    public void setInWatchlistOf(List<User> inWatchlistOf) {
         this.inWatchlistOf = inWatchlistOf;
     }
 }

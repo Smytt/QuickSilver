@@ -1,5 +1,9 @@
 package com.quicksilver.quicksilver.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +22,23 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private ArrayList<Movie> favorites;
+    @JsonManagedReference
+    private List<Movie> favorites;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "watchlist",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private ArrayList<Movie> watchlist;
+    @JsonManagedReference
+    private List<Movie> watchlist;
 
 
     public User() {
@@ -63,19 +69,19 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Movie> getFavorites() {
+    public List<Movie> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(ArrayList<Movie> favorites) {
+    public void setFavorites(List<Movie> favorites) {
         this.favorites = favorites;
     }
 
-    public ArrayList<Movie> getWatchlist() {
+    public List<Movie> getWatchlist() {
         return watchlist;
     }
 
-    public void setWatchlist(ArrayList<Movie> watchlist) {
+    public void setWatchlist(List<Movie> watchlist) {
         this.watchlist = watchlist;
     }
 }

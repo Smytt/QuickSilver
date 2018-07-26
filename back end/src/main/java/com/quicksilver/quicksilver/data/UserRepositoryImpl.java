@@ -1,11 +1,14 @@
 package com.quicksilver.quicksilver.data;
 
+import com.quicksilver.quicksilver.data.base.GenericRepository;
+import com.quicksilver.quicksilver.data.base.UserRepository;
 import com.quicksilver.quicksilver.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,13 +22,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getById(int id) {
+    public User findById(int id) {
         User user = null;
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             user = session.get(User.class, id);
-        }
-        catch (Exception e) {
+            user.getFavorites().size();
+            user.getWatchlist().size();
+        } catch (Exception e) {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());
         }
@@ -34,21 +38,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getByUsername(String username) {
-        List<User> user = null;
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            user = session
-                    .createQuery("from User u where u.username = :username")
-                    .setParameter("username", username)
-                    .list();
-        }
-        catch (Exception e) {
-            System.out.println("--- ERR ---");
-            System.out.println(e.getMessage());
-        }
-
-        return user.get(0);
+    public List<User> listAll() {
+        return null;
     }
 
     @Override
@@ -56,10 +47,36 @@ public class UserRepositoryImpl implements UserRepository {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(user);
-        }
-        catch (Exception e) {
+            session.getTransaction().commit();
+        } catch (Exception e) {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
+    public void update(int it, User model) {
+
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        User user = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            user = (User) session
+                    .createQuery("from User where username = :username")
+                    .setParameter("username", username)
+                    .list().get(0);
+        } catch (Exception e) {
+            System.out.println("--- ERR ---");
+            System.out.println(e.getMessage());
+        }
+        return user;
     }
 }
