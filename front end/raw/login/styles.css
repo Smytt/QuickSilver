@@ -1,0 +1,122 @@
+html,
+body {
+    margin: 0;
+    font-family: 'Varela';
+}
+
+a {
+    text-decoration-line: none;
+}
+
+main a {
+    display: inline-block;
+}
+
+.silver {
+    margin-left: 4px;
+    color: #b2b2b2;
+    font-family: 'Pacifico';
+}
+
+.quick {
+    font-family: 'Pacifico';
+    color: #3e9cd6;
+}
+
+header {
+    overflow: hidden;
+    background-image: url("login-background.png");
+    padding: 33px 50px;
+}
+
+input {
+    width: 100%;
+    border-radius: 3px;
+    height: 20px;
+    border: 1px solid #3688bc;
+    padding: 10px 10px;
+    color: #0c2c60;
+}
+
+header a {
+    float: left;
+    line-height: 25px;
+    text-align: center;
+}
+
+.logo {
+    font-size: 35px;
+    padding: 12px;
+}
+
+.login-register {
+    font-size: 15px;
+    float: right;
+    padding: 12px;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid #3688bc;
+    border-radius: 5px;
+    line-height: 25px;
+    text-align: center;
+    margin-left: 20px;
+    color: #3688bc;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+main a {
+    color: #b2b2b2;
+    font-size: 10px;
+}
+
+main h1 {
+    color: #0c2c60;
+    font-size: 40px;
+    text-align: center;
+}
+
+main h2 {
+    color: #0c2c60;
+    margin-top: 70px;
+    font-size: 40px;
+    text-align: center;
+}
+
+main button {
+    background-color: transparent;
+    border: 1px solid #3688bc;
+    border-radius: 3px;
+    line-height: 25px;
+    text-align: center;
+    width: 322px;
+    margin: auto;
+    padding: 10px 10px;
+    margin-top: 20px;
+    color: #0c2c60;
+}
+
+.description input {
+    height: 80px;
+}
+
+main div {
+    width: 300px;
+    margin: auto;
+}
+
+.submit {
+    width: 322px;
+    margin: auto;
+}
+
+footer {
+    overflow: hidden;
+    background-image: url("footer-background.png");
+    padding: 250px 50px;
+    margin-top: 150px;
+}

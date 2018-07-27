@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <link rel="stylesheet" href="styles.css">
+        <link async href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Varela' rel='stylesheet'>
+</head>
+
+<body>
+        <header>
+
+                <div class="logo inline-block">
+                        <a href="#default" class="quick">quick</a>
+                        <a href="#default" class="silver">silver</a>
+                </div>
+                <div class="login-register inline-block">
+                        <button id="login">LOGIN</button>
+                        <button id="register">REGISTER</button>
+                </div>
+
+        </header>
+        <main id="main">
+                <div id="wrapper-login">
+                        <h1>Login</h1>
+                        <div class="username">
+                                <a id="username-title">USERNAME</a>
+                                <input class="username-input" type="text" name="username" placeholder="Sample Username">
+                        </div>
+                        <div class="password">
+                                <a>PASSWORD</a>
+                                <input class="username-input" type="password" name="password" placeholder="*************">
+                                <button class="font-varela heavy-blue">Submit</button>
+                        </div>
+                        <h2>ADD MOVIE</h2>
+                        <div class="title">
+                                <a>TITLE</a>
+                                <input class="title" type="text" name="title" placeholder="The Martix">
+                        </div>
+                        <div class="description">
+                                <a>DESCRIPTION</a>
+                                <input class="title" type="text" name="description">
+                        </div>
+                        <div class="poster">
+                                <a>PATH TO POSTER</a>
+                                <input class="title" type="text" name="path-to-poster" placeholder="http://imdb.......jpg">
+                                <button>ADD MOVIE</button>
+                        </div>
+                </div>
+                <div id="wrapper-register">
+                        <h1 class="heavy-blue">Register</h1>
+                        <div class="username">
+                                <a name="username" id="username-title">USERNAME</a>
+                                <input class="username-input" type="text" name="username" placeholder="GregeryMc">
+                        </div>
+                        <div class="password" id="password">
+                                <a>PASSWORD</a>
+                                <input class="username-input" type="password" name="password" placeholder="*************">
+                                <a>REPEAT PASSWORD</a>
+                                <input class="username-input" type="password" name="password" placeholder="*************">
+                                <button id="register-accepted" class="font-varela heavy-blue">Register</button>
+                        </div>
+                </div>
+        </main>
+        <footer>
+
+        </footer>
+        <script src="myScript.js"></script>
+</body>
+
+</html>
