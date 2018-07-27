@@ -77,6 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
                     .createQuery("from User where username = :username")
                     .setParameter("username", username)
                     .list().get(0);
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());

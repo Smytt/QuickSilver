@@ -28,8 +28,6 @@ public class MovieRepositoryImpl implements MovieRepository {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             movie = session.get(Movie.class, id);
-            movie.getFavedBy();
-            movie.getInWatchlistOf();
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("--- ERR ---");
@@ -76,6 +74,7 @@ public class MovieRepositoryImpl implements MovieRepository {
                     .createQuery("from Movie where title like :query")
                     .setParameter("query", "%" + query + "%")
                     .list();
+            session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());
