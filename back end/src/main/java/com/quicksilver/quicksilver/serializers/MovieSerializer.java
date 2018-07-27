@@ -29,14 +29,20 @@ public class MovieSerializer extends StdSerializer<Movie> {
         jsonGenerator.writeArrayFieldStart("favedBy");
 
         for (User f : movie.getFavedBy()) {
-            jsonGenerator.writeNumber(f.getId());
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("id", f.getId());
+            jsonGenerator.writeStringField("username", f.getUsername());
+            jsonGenerator.writeEndObject();
         }
 
         jsonGenerator.writeEndArray();
         jsonGenerator.writeArrayFieldStart("inWatchlistOf");
 
         for (User w : movie.getInWatchlistOf()) {
-            jsonGenerator.writeNumber(w.getId());
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("id", w.getId());
+            jsonGenerator.writeStringField("username", w.getUsername());
+            jsonGenerator.writeEndObject();
         }
 
         jsonGenerator.writeEndArray();

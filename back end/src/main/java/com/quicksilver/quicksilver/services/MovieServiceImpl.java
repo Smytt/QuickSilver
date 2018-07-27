@@ -8,6 +8,8 @@ import com.quicksilver.quicksilver.services.base.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -21,5 +23,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie findById(int id) {
         return movieRepository.findById(id);
+    }
+
+    @Override
+    public List<Movie> search(String query) {
+        return movieRepository.find(query);
     }
 }

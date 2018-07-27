@@ -26,14 +26,22 @@ public class UserSerializer extends StdSerializer<User> {
         jsonGenerator.writeArrayFieldStart("favorites");
 
         for (Movie f : user.getFavorites()) {
-            jsonGenerator.writeNumber(f.getId());
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("id", f.getId());
+            jsonGenerator.writeStringField("title", f.getTitle());
+            jsonGenerator.writeStringField("poster", f.getPoster());
+            jsonGenerator.writeEndObject();
         }
 
         jsonGenerator.writeEndArray();
         jsonGenerator.writeArrayFieldStart("watchlist");
 
         for (Movie w : user.getWatchlist()) {
-            jsonGenerator.writeNumber(w.getId());
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("id", w.getId());
+            jsonGenerator.writeStringField("title", w.getTitle());
+            jsonGenerator.writeStringField("poster", w.getPoster());
+            jsonGenerator.writeEndObject();
         }
 
         jsonGenerator.writeEndArray();

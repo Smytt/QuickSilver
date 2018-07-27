@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/movie")
@@ -25,6 +26,11 @@ public class MovieController {
         Movie movie = movieService.findById(id);
         System.out.println(movie.getFavedBy().size());
         return movie;
+    }
+
+    @GetMapping(value = "/search/{query}")
+    public List<Movie> searchMovies(@PathVariable(name = "query") String query) {
+        return movieService.search(query);
     }
 
 }

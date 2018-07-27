@@ -44,13 +44,15 @@ var app = (() => {
     }
 
     var search = function () {
-
+        var query = 'Matrix';
+        remote.search(query);
     }
 
     return {
         start,
         login,
         register,
+        search,
     }
 })();
 

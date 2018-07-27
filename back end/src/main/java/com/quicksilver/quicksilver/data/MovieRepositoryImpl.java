@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -66,4 +67,20 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     }
 
+    @Override
+    public List<Movie> find(String query) {
+        List<Movie> movies = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            movies = session
+                    .createQuery("from Movie where title like :query")
+                    .setParameter("query", "%" + query + "%")
+                    .list();
+        } catch (Exception e) {
+            System.out.println("--- ERR ---");
+            System.out.println(e.getMessage());
+        }
+
+        return movies;
+    }
 }

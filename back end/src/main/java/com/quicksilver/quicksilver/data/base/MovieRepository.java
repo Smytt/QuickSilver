@@ -1,7 +1,10 @@
 package com.quicksilver.quicksilver.data.base;
 
 import com.quicksilver.quicksilver.models.Movie;
-import com.quicksilver.quicksilver.models.User;
+
+import java.util.List;
 
 public interface MovieRepository extends GenericRepository<Movie> {
+    List find(String query);
+
 }
