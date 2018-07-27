@@ -12,7 +12,7 @@ public interface GenericRepository<T> {
 
     List<T> listAll();
 
-    void create(T model);
+    T create(T model);
 
     void delete(int id);
 

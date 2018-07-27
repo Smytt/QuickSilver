@@ -25,14 +25,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(User user) {
-        userRepository.create(user);
+    public User register(User user) {
+        return userRepository.create(user);
     }
 
     @Override
-    public User login(User user) {
+    public User findByUsername(User user) {
         User dbUser = userRepository.findByUsername(user.getUsername());
-        if(Objects.equals(dbUser.getPassword(), user.getPassword())) {
+        System.out.println(dbUser.getUsername());
+        if (Objects.equals(dbUser.getPassword(), user.getPassword())) {
             System.out.println("logged");
         }
 

@@ -6,6 +6,7 @@ import com.quicksilver.quicksilver.serializers.UserSerializer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,13 +25,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Transient
+    private String repeatPassword;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "favorites",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private Set<Movie> favorites;
+    private Set<Movie> favorites = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -38,7 +42,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private Set<Movie> watchlist;
+    private Set<Movie> watchlist = new HashSet<>();
 
 
     public User() {
@@ -83,5 +87,13 @@ public class User {
 
     public void setWatchlist(Set<Movie> watchlist) {
         this.watchlist = watchlist;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }

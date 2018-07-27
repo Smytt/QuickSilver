@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
@@ -25,17 +26,16 @@ public class UserController {
         return user;
     }
 
-    @PostMapping(value = "/signup")
+    @PostMapping(value = "/register")
     @ResponseBody
     public User register(@RequestBody User user) {
-        userService.register(user);
-        return user;
+        return userService.register(user);
     }
 
     @PostMapping(value = "/login")
     @ResponseBody
     public User login(@RequestBody User user) {
-        return userService.login(user);
+        return userService.findByUsername(user);
     }
 
     @GetMapping(value = "/logout")

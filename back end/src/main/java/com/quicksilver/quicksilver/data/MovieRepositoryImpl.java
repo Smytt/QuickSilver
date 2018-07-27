@@ -44,7 +44,7 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public void create(Movie movie) {
+    public Movie create(Movie movie) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.save(movie);
@@ -53,6 +53,7 @@ public class MovieRepositoryImpl implements MovieRepository {
             System.out.println("--- ERR ---");
             System.out.println(e.getMessage());
         }
+        return movie;
     }
 
     @Override

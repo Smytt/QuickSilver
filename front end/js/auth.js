@@ -1,12 +1,49 @@
-auth = (() => {
+var auth = (() => {
 
-    var auth = false;
+    const base = "http://localhost:8080/user";
 
-    isAuth = function () {
-
+    var isAuth = function () {
+        return sessionStorage.getItem("username") !== null;
     }
+
+    var setAuth = function (res) {
+        sessionStorage.setItem("username", res['username']);
+        sessionStorage.setItem("id", res['id']);
+    }
+
+    var login = (user) => {
+        $.ajax({
+            type: "POST",
+            url: base + '/login',
+            contentType: 'application/json',
+            data: JSON.stringify(user),
+            dataType: 'json',
+            success: setAuth,
+            error: (e) => {
+              console.log("login failed")
+            }
+        })
+    }
+
+    var register = (user) => {
+        $.ajax({
+            type: "POST",
+            url: base + '/register',
+            contentType: 'application/json',
+            data: JSON.stringify(user),
+            dataType: 'json',
+            success: (res) => {
+                console.log(res)
+            },
+            error: (e) => {
+                console.log("register failed")
+            }
+        })
+    }
+
 
     return {
-
+        login,
+        register,
     }
-})
+})()

@@ -5,7 +5,7 @@ import com.quicksilver.quicksilver.models.User;
 public interface UserService {
     User findById (int id);
 
-    void register(User user);
+    User register(User user);
 
-    User login(User user);
+    User findByUsername(User user);
 }
