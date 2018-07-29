@@ -10,15 +10,32 @@ var app = (() => {
     }
 
     var start = () => {
-        //todo attach events!
+        $("#login").on('click', getLoginView);
+        $("#logout").on('click', logout);
+        $("#search").on('click', getSearchView);
+        $("#submit-movie").on('click', getSubmitView);
+    }
+
+    var getLoginView = (e) => {
+        e.preventDefault();
+        render.loginView();
+    }
+
+    var getSearchView = (e) => {
+        e.preventDefault();
+        render.searchView();
+    }
+
+    var getSubmitView = (e) => {
+        e.preventDefault();
     }
 
     var login = function (e) {
         if (e) {
             e.preventDefault();
         }
-        var username = 'kiko';
-        var password = 'pass';
+        var username = $('#username').val();
+        var password = $('#password').val();
 
         var user = {
             username,
@@ -41,6 +58,12 @@ var app = (() => {
             passwordRepeat,
         }
         auth.register(user);
+        $("#login").trigger('click');
+    }
+
+    var logout = () => {
+        auth.logout();
+        getlogin();
     }
 
     var search = function () {

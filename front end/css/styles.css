@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+ @import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
 * {
     box-sizing: border-box;
@@ -134,7 +134,7 @@ input::placeholder {
     margin-top: 2px;
 }
 
-.logo a {
+.logo > a {
     display: block;
     background: url("../img/logo.png");
     width: 235px;

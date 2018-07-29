@@ -41,9 +41,14 @@ var auth = (() => {
         })
     }
 
+    var logout = () => {
+        sessionStorage.clear();
+    }
 
     return {
         login,
         register,
+        logout,
+        isAuth
     }
 })()
