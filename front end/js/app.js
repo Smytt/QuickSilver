@@ -63,7 +63,7 @@ var app = (() => {
 
     var logout = () => {
         auth.logout();
-        getlogin();
+        getLoginView();
     }
 
     var search = () => {
