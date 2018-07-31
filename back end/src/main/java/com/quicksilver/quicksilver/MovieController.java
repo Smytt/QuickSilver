@@ -29,8 +29,13 @@ public class MovieController {
     }
 
     @GetMapping(value = "/search/{query}")
-    public List<Movie> searchMovies(@PathVariable(name = "query") String query) {
+    public List<Movie> search(@PathVariable(name = "query") String query) {
         return movieService.search(query);
     }
 
+    @PostMapping(value = "/submit")
+    @ResponseBody
+    public Movie submit(@RequestBody Movie movie) {
+        return movieService.submit(movie);
+    }
 }

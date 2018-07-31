@@ -29,4 +29,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> search(String query) {
         return movieRepository.find(query);
     }
+
+    @Override
+    public Movie submit(Movie movie) {
+        return movieRepository.create(movie);
+    }
 }

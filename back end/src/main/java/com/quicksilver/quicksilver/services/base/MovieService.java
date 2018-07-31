@@ -9,4 +9,6 @@ public interface MovieService {
     Movie findById(int id);
 
     List<Movie> search(String query);
+
+    Movie submit(Movie movie);
 }

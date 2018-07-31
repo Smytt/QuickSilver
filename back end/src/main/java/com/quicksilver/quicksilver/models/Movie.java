@@ -6,6 +6,7 @@ import com.quicksilver.quicksilver.serializers.MovieSerializer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> favedBy;
+    private Set<User> favedBy = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -44,7 +45,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> inWatchlistOf;
+    private Set<User> inWatchlistOf = new HashSet<>();
 
     public Movie() {
 

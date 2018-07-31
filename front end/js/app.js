@@ -66,9 +66,25 @@ var app = (() => {
         getlogin();
     }
 
-    var search = function () {
+    var search = () => {
         var query = 'Matrix';
         remote.search(query);
+    }
+
+    var submit = () => {
+        var title = 'sample movie';
+        var description = 'sample description';
+        var poster = 'poster img';
+
+        var movie = {
+            title: title,
+            summary: description,
+            poster: poster,
+            year: 2008,
+        }
+
+        remote.submit(movie);
+
     }
 
     return {
@@ -76,6 +92,7 @@ var app = (() => {
         login,
         register,
         search,
+        submit,
     }
 })();
 
