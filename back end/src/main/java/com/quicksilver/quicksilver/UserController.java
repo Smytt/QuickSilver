@@ -22,7 +22,6 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public User getById(@PathVariable(name = "id") int id) {
         User user = userService.findById(id);
-        System.out.println(user.getFavorites().size());
         return user;
     }
 
@@ -36,12 +35,6 @@ public class UserController {
     @ResponseBody
     public User login(@RequestBody User user) {
         return userService.findByUsername(user);
-    }
-
-    @GetMapping(value = "/logout")
-    public String logout(HttpSession session) {
-        session.removeAttribute("user");
-        return session.getAttribute("logged").toString();
     }
 
 }

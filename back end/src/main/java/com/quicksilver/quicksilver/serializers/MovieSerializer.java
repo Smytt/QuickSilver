@@ -7,6 +7,7 @@ import com.quicksilver.quicksilver.models.Movie;
 import com.quicksilver.quicksilver.models.User;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class MovieSerializer extends StdSerializer<Movie> {
 
@@ -27,25 +28,20 @@ public class MovieSerializer extends StdSerializer<Movie> {
         jsonGenerator.writeStringField("poster", movie.getPoster());
         jsonGenerator.writeNumberField("year", movie.getYear());
         jsonGenerator.writeArrayFieldStart("favedBy");
-
-        for (User f : movie.getFavedBy()) {
-            jsonGenerator.writeStartObject();
-            jsonGenerator.writeNumberField("id", f.getId());
-            jsonGenerator.writeStringField("username", f.getUsername());
-            jsonGenerator.writeEndObject();
-        }
-
+        generateArray(jsonGenerator, movie.getFavedBy());
         jsonGenerator.writeEndArray();
         jsonGenerator.writeArrayFieldStart("inWatchlistOf");
-
-        for (User w : movie.getInWatchlistOf()) {
-            jsonGenerator.writeStartObject();
-            jsonGenerator.writeNumberField("id", w.getId());
-            jsonGenerator.writeStringField("username", w.getUsername());
-            jsonGenerator.writeEndObject();
-        }
-
+        generateArray(jsonGenerator, movie.getInWatchlistOf());
         jsonGenerator.writeEndArray();
         jsonGenerator.writeEndObject();
+    }
+
+    private void generateArray(JsonGenerator jsonGenerator, Set<User> collection) throws IOException {
+        for (User u : collection) {
+            jsonGenerator.writeStartObject();
+            jsonGenerator.writeNumberField("id", u.getId());
+            jsonGenerator.writeStringField("username", u.getUsername());
+            jsonGenerator.writeEndObject();
+        }
     }
 }
