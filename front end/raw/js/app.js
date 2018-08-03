@@ -1,5 +1,4 @@
 var app = (() => {
-
     var alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890-';
     var randId = () => {
         var id = '';
@@ -45,11 +44,11 @@ var app = (() => {
         var username = $('#username').val();
         var password = $('#password').val();
 
-        var user = {
+        var username = {
             username,
             password,
         }
-        auth.login(user);
+        auth.login(username);
     }
     var logout = () => {
         auth.logout();
@@ -74,8 +73,8 @@ var app = (() => {
     }
 
     var search = () => {
-        var query = 'Matrix';
-        remote.search(query);
+        var movieName = $('#title').val();
+        remote.search(movieName);
     }
 
     var submit = () => {

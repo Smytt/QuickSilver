@@ -11,20 +11,23 @@ var auth = (() => {
         sessionStorage.setItem("id", res['id']);
     }
 
-    var login = (user) => {
-        $.ajax({
-            type: "POST",
-            url: base + '/login',
-            contentType: 'application/json',
-            data: JSON.stringify(user),
-            dataType: 'json',
-            success: setAuth,
-            error: (e) => {
-              console.log("login failed")
-            }
-        })
-    }
+    var login = (username) => {
+//       $.ajax({
+//            type: "POST",
+//            url: base + '/login',
+//            contentType: 'application/json',
+//            data: JSON.stringify(user),
+//            dataType: 'json',
+//            success: setAuth,
+//            error: (e) => {
+//              console.log("login failed")
+//            }
+//        })
+        show.loggedNav(username);
+        remote.userMovies(username);
 
+
+    }
     var register = (user) => {
         $.ajax({
             type: "POST",

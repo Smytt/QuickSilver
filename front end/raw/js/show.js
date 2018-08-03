@@ -9,7 +9,7 @@ var show = (() => {
                 var $loginView = Mustache.render(tmpl);
                 $content.empty();
                 $content.append($loginView);
-                $content.find('button').on('click', app.login)
+                $content.find('#submit').on('click', app.login);
             },
             error: () => {
                 var err = "Could not load login page";
@@ -24,6 +24,7 @@ var show = (() => {
                 success: (tmpl) => {
                     var $loginNav = Mustache.render(tmpl);
                     $nav.empty();
+                    $content.empty();
                     $nav.append($loginNav);
                 },
                 error: () => {
@@ -33,15 +34,17 @@ var show = (() => {
                 },
             })
         }
-     var loggedNav = () => {
+     var loggedNav = (username) => {
             $.ajax({
                 url: './templates/logged-nav.html',
                 success: (tmpl) => {
-                var Name = "georgi";
-                    var $loggedNav = Mustache.render(tmpl, Name);
+                    var $loggedNav = Mustache.render(tmpl, username);
                     $nav.empty();
                     $nav.append($loggedNav);
                     $content.empty();
+                    $nav.find('#search').on('click',searchView);
+                    $nav.find('#logout').on('click',loginNav);
+                    $nav.find('#submit-movie').on('click',submitView);
                 },
                 error: () => {
                     var err = "Could not load logged nav";
@@ -50,7 +53,21 @@ var show = (() => {
                 },
             })
         }
-
+     var userMovies = (movie) => {
+        $.ajax({
+           url: './templates/userInfo.html',
+           success: (tmpl) => {
+           debugger;
+               var $userInfo = Mustache.render(tmpl,movie);
+               $content.empty();
+               $content.append($userInfo);
+                },
+                error: () => {
+                    var err = "Could not load user movies";
+                    console.log(err);
+                },
+            })
+     }
     var registerView = () => {
         $.ajax({
         url: './templates/register.html',
@@ -71,9 +88,9 @@ var show = (() => {
         $.ajax({
             url: './templates/search.html',
             success: (tmpl) => {
-                var searchView = Mustache.render(tmpl);
+                var $searchView = Mustache.render(tmpl);
                 $content.empty();
-                $content.append(searchView);
+                $content.append($searchView);
                 $content.find('button').on('click', app.search)
             },
             error: () => {
@@ -90,12 +107,11 @@ var show = (() => {
                     var $submitView = Mustache.render(tmpl);
                     $content.empty();
                     $content.append($submitView);
-                    $content.find('button').on('click', app.submit)
+                    $content.find('#submit-movie').on('click', app.submit)
                 },
                 error: () => {
-                    var err = "Could not load movie view";
+                    var err = "Could not load submit view";
                     console.log(err);
-                    $content.prepend(err);
                 },
             })
         }
@@ -111,5 +127,7 @@ var show = (() => {
         loginNav,
         loggedNav,
         submitView,
+        added,
+        userMovies,
     }
 })();
