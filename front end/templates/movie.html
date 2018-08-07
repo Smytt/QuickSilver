@@ -1,22 +1,35 @@
 <div class="poster"
-     style="background-image: url(https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,665,1000_AL_.jpg)"></div>
+     style="background-image: url({{poster}})"></div>
 <div class="movie-info">
-    <h1>The Matrix</h1>
+    <h1>{{title}}</h1>
+    <h2>{{year}}</h2>
     <button><i class="fas fa-star"></i><span>favorites</span></button>
     <button class="selected"><i class="fas fa-play-circle"></i><span>watchlist</span></button>
-    <p>A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the
-        war against its controllers.</p>
+    <p>{{summary}}</p>
+
+
     <h2>Faved by</h2>
+    {{#favedBy.length}}
     <ul class="button-list">
-        <li><a href="">Pesho</a></li>
-        <li><a href="">Gosho</a></li>
-        <li><a href="">Misho</a></li>
+        {{#favedBy}}
+        <li><a href="" userId="{{id}}">{{username}}</a></li>
+        {{/favedBy}}
     </ul>
+    {{/favedBy.length}}
+    {{^favedBy.length}}
+    <p>No one</p>
+    {{/favedBy.length}}
+
     <h2>To be watched by</h2>
+    {{#inWatchlistOf.length}}
     <ul class="button-list">
-        <li><a href="">Pesho</a></li>
-        <li><a href="">Gosho</a></li>
-        <li><a href="">Misho</a></li>
+        {{#inWatchlistOf}}
+        <li><a href="" userId="{{id}}">{{username}}</a></li>
+        {{/inWatchlistOf}}
     </ul>
+    {{/inWatchlistOf.length}}
+    {{^inWatchlistOf.length}}
+    <p>No one</p>
+    {{/inWatchlistOf.length}}
 </div>
     

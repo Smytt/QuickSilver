@@ -1,39 +1,50 @@
 var app = (() => {
 
-    var alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890-';
-    var randId = () => {
-        var id = '';
-        for (var i = 0; i < 5; i++) {
-            id += alphabet[Math.floor(Math.random() * 36)];
-        }
-        return id;
-    }
+    var $profile = $('#profile');
 
-    var start = () => {
-        $("#login").on('click', getLoginView);
-        $("#logout").on('click', logout);
-        $("#search").on('click', getSearchView);
-        $("#submit-movie").on('click', getSubmitView);
+    var home = (e) => {
+        preventDefault(e);
+
+        if (!auth.isAuth()) {
+            getLoginView()
+        }
+        else {
+            $profile.attr('userId', auth.getAuth().id)
+            $profile.trigger('click');
+        }
     }
 
     var getLoginView = (e) => {
-        e.preventDefault();
-        render.loginView();
+        preventDefault(e);
+        show.loginView();
+    }
+
+    var getRegisterView = (e) => {
+        preventDefault(e);
+        show.registerView()
+    }
+
+    var getProfileView = function (e) {
+        preventDefault(e);
+
+        var id = $(this).attr('userId');
+        remote.getUser(id);
     }
 
     var getSearchView = (e) => {
-        e.preventDefault();
-        render.searchView();
+        preventDefault(e);
+        show.searchView();
     }
 
     var getSubmitView = (e) => {
-        e.preventDefault();
+        preventDefault(e);
+        show.submitView();
     }
 
     var login = function (e) {
-        if (e) {
-            e.preventDefault();
-        }
+        preventDefault(e);
+        if (!hitEnter(e)) return;
+
         var username = $('#username').val();
         var password = $('#password').val();
 
@@ -45,12 +56,12 @@ var app = (() => {
     }
 
     var register = function (e) {
-        if (e) {
-            e.preventDefault();
-        }
-        var username = randId();
-        var password = 'pass';
-        var passwordRepeat = 'pass';
+        preventDefault(e);
+        if (!hitEnter(e)) return;
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var passwordRepeat = $('#repeat-password').val();
 
         var user = {
             username,
@@ -61,30 +72,73 @@ var app = (() => {
         $("#login").trigger('click');
     }
 
-    var logout = () => {
+    var logout = (e) => {
+        preventDefault(e);
+
         auth.logout();
         getLoginView();
     }
 
-    var search = () => {
-        var query = 'Matrix';
-        remote.search(query);
+    var search = (e) => {
+        preventDefault(e);
+        if (!hitEnter(e)) return;
+
+        var title = $('#title').val();
+        remote.search(title);
     }
 
-    var submit = () => {
-        var title = 'sample movie';
-        var description = 'sample description';
-        var poster = 'poster img';
+    var submit = (e) => {
+        preventDefault(e);
+        if (!hitEnter(e)) return;
+
+        var title = $('#title').val();
+        var summary = $('#summary').val();
+        var poster = $('#poster').val();
+        var year = $('#year').val();
 
         var movie = {
-            title: title,
-            summary: description,
-            poster: poster,
-            year: 2008,
+            title,
+            summary,
+            poster,
+            year
         }
 
         remote.submit(movie);
 
+    }
+
+    var getMovieView = function (e) {
+        preventDefault(e);
+
+        var id = $(this).attr('movieId')
+        remote.getMovie(id);
+    }
+
+    var start = () => {
+
+        $(".logo").on('click', home);
+        $("#login").on('click', getLoginView);
+        $("#register").on('click', getRegisterView);
+        $("#profile").on('click', getProfileView);
+        $("#logout").on('click', logout);
+        $("#search").on('click', getSearchView);
+        $("#submit-movie").on('click', getSubmitView);
+
+        home();
+    }
+
+    function preventDefault(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }
+
+    function hitEnter(e) {
+        if (e.type === 'keypress' && e.which !== 13) {
+            return false;
+        }
+        return true
     }
 
     return {
@@ -93,6 +147,9 @@ var app = (() => {
         register,
         search,
         submit,
+        home,
+        getMovieView,
+        getProfileView
     }
 })();
 

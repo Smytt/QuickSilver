@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css?family=Varela+Round');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
 * {
     box-sizing: border-box;
@@ -52,6 +52,7 @@ nav a, button {
 .button-list a {
     display: inline-block;
 }
+
 nav a:hover {
     background: #fff;
     border-color: #fff;
@@ -192,6 +193,7 @@ nav li {
     font-weight: normal;
     margin-bottom: 25px;
 }
+
 .movie-info button:active {
     padding: 6px;
     margin: 2px;
@@ -202,6 +204,7 @@ nav li {
     background: #97bb57;
     color: #fff;
 }
+
 .movie-info button.selected:hover {
     background-color: #c5e095;
     border-color: #c5e095;
@@ -213,6 +216,7 @@ nav li {
 
 .movie-info button i {
 }
+
 .movie-info button span {
     display: inline-block;
     width: 100px;
@@ -239,10 +243,17 @@ nav li {
     margin: 10px 0;
 }
 
-.container > h2 {
+#content > h2, .movies-block > h2, #search-results > h2 {
     font-size: 32px;
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.movies-block::after {
+    content: '';
+    clear: both;
+    display: block;
 }
 
 .one-item {
@@ -250,6 +261,7 @@ nav li {
     float: left;
     padding: 10px;
 }
+
 .one-item:hover {
     background-color: #edf2f9;
     cursor: pointer;
@@ -259,6 +271,7 @@ nav li {
 .one-item h1 {
     font-size: 26px;
 }
+
 .one-item .poster {
     width: 200px;
     height: 200px;
@@ -267,5 +280,9 @@ nav li {
 }
 
 .one-item .movie-info {
-    width:  340px;
+    width: 340px;
+}
+
+.center {
+    text-align: center;
 }

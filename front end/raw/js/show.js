@@ -2,6 +2,7 @@ var show = (() => {
 
     $content = $('#content');
     $nav = $('#nav');
+
     var loginView = () => {
         $.ajax({
             url: './templates/login.html',

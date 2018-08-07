@@ -7,8 +7,16 @@ var auth = (() => {
     }
 
     var setAuth = function (res) {
+        $('#profile').attr('userId', res['id'])
         sessionStorage.setItem("username", res['username']);
         sessionStorage.setItem("id", res['id']);
+    }
+
+    var getAuth = function () {
+        return {
+            username: sessionStorage.getItem('username'),
+            id: sessionStorage.getItem('id')
+        }
     }
 
     var login = (user) => {
@@ -18,7 +26,10 @@ var auth = (() => {
             contentType: 'application/json',
             data: JSON.stringify(user),
             dataType: 'json',
-            success: setAuth,
+            success: (res) => {
+                setAuth(res);
+                app.home();
+            },
             error: (e) => {
               console.log("login failed")
             }
@@ -49,6 +60,7 @@ var auth = (() => {
         login,
         register,
         logout,
-        isAuth
+        isAuth,
+        getAuth
     }
 })()

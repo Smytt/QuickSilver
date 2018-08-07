@@ -7,7 +7,7 @@ remote = (() => {
             type: 'GET',
             url: base + "/movie/search/" + query,
             success: (res) => {
-                console.log(res);
+
             },
             error: (e) => {
                 console.log("Couldn't retrieve movie list")

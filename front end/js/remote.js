@@ -2,12 +2,12 @@ remote = (() => {
 
     const base = "http://localhost:8080";
 
-    var search = (query) => {
+    var search = (title) => {
         $.ajax({
             type: 'GET',
-            url: base + "/movie/search/" + query,
+            url: base + "/movie/search/" + title,
             success: (res) => {
-                console.log(res);
+                render.searchResults(res, title)
             },
             error: (e) => {
                 console.log("Couldn't retrieve movie list")
@@ -23,7 +23,8 @@ remote = (() => {
             contentType: 'application/json',
             dataType: 'json',
             success: (res) => {
-                console.log(res);
+                console.log(movie);
+                render.movieInfo(movie)
             },
             error: (e) => {
                 console.log("Couldn't submit movie");
@@ -31,8 +32,37 @@ remote = (() => {
         })
     }
 
+    var getUser = (id) => {
+        $.ajax({
+            type: 'GET',
+            url: base + "/user/" + id,
+            success: (res) => {
+                render.userInfo(res);
+            },
+            error: (e) => {
+                console.log("Couldn't retrieve user")
+            }
+        })
+    }
+
+    var getMovie = (id) => {
+        $.ajax({
+            type: 'GET',
+            url: base + "/movie/" + id,
+            success: (res) => {
+                console.log(res);
+                render.movieInfo(res);
+            },
+            error: (e) => {
+                console.log("Couldn't retrieve movie")
+            }
+        })
+    }
+
     return {
         search,
         submit,
+        getUser,
+        getMovie
     }
 })()

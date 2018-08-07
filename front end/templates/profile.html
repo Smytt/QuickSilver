@@ -1,0 +1,34 @@
+<h1>{{username}}'s movies</h1>
+<div class="movies-block">
+    <h2>Favorites</h2>
+
+    {{#favorites}}
+    <div class="one-item" movieId="{{id}}">
+        <div class="poster"
+             style="background-image: url({{poster}})"></div>
+        <div class="movie-info">
+            <h1>{{title}}</h1>
+            <p>{{summary}}</p></div>
+    </div>
+    {{/favorites}}
+
+    {{^favorites.length}}
+    <p class="center">No movies in favorites</p>
+    {{/favorites.length}}
+</div>
+<div class="movies-block">
+    <h2>Watchlist</h2>
+    {{#watchlist}}
+    <div class="one-item" movieId="{{id}}">
+        <div class="poster"
+             style="background-image: url({{poster}})"></div>
+        <div class="movie-info">
+            <h1>{{title}}</h1>
+            <p>{{summary}}</p></div>
+    </div>
+    {{/watchlist}}
+
+    {{^watchlist.length}}
+    <p class="center">No movies in watchlist</p>
+    {{/watchlist.length}}
+</div>

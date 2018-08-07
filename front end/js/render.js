@@ -1,43 +1,41 @@
 var render = (() => {
 
-    $content = $('#content');
-
-    var loginView = () => {
-        $.ajax({
-            url: './templates/login.html',
-            success: (tmpl) => {
-                var $html = Mustache.render(tmpl);
-                $content.empty();
-                $content.append($html);
-                $content.find('button').on('click', app.login)
-            },
-            error: () => {
-                var err = "Could not load login page";
-                console.log(err);
-                $content.prepend(err);
-            },
-        })
+    var movieInfo = (movie) => {
+        show.movieView(movie);
     }
 
-    var searchView = () => {
-        $.ajax({
-            url: './templates/search.html',
-            success: (tmpl) => {
-                var $html = Mustache.render(tmpl);
-                $content.empty();
-                $content.append($html);
-                $content.find('button').on('click', app.search)
-            },
-            error: () => {
-                var err = "Could not load search page";
-                console.log(err);
-                $content.prepend(err);
-            },
+    var userInfo = (user) => {
+
+        formatMovies(user['favorites']);
+        formatMovies(user['watchlist']);
+
+        show.profileView(user)
+    }
+
+    var searchResults = (results, title) => {
+        formatMovies(results)
+        var movies = {
+            results,
+            count: results.length,
+            title
+        }
+        show.searchResults(movies)
+    }
+
+    function formatMovies(movies) {
+        movies.forEach(movie => {
+            if (movie['title'].length > 20) {
+                movie['title'] = movie['title'].substr(0, 20) + '...';
+            }
+            if (movie['summary'].length > 200) {
+                movie['summary'] = movie['summary'].substr(0, 200) + '...';
+            }
         })
     }
 
     return {
-        loginView,
-        searchView,
+        userInfo,
+        movieInfo,
+        searchResults
     }
 })();

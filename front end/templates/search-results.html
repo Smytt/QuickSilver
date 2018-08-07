@@ -1,0 +1,12 @@
+<div id="search-results">
+    <h2>{{count}} results for &quot;{{title}}&quot;:</h2>
+    {{#results}}
+    <div class="one-item" movieId="{{id}}">
+        <div class="poster"
+             style="background-image: url({{poster}})"></div>
+        <div class="movie-info">
+            <h1>{{title}}</h1>
+            <p>{{summary}}</p></div>
+    </div>
+    {{/results}}
+</div>
