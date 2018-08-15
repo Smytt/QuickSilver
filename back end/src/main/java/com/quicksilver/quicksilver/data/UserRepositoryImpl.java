@@ -65,7 +65,15 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void update(int it, User model) {
-
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(model);
+            session.getTransaction().commit();
+        }
+        catch (Exception e) {
+            System.out.println("--- ERR ---");
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

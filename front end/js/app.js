@@ -9,6 +9,7 @@ var app = (() => {
             getLoginView()
         }
         else {
+            $profile.text(auth.getAuth().username)
             $profile.attr('userId', auth.getAuth().id)
             $profile.trigger('click');
         }
@@ -127,6 +128,30 @@ var app = (() => {
         home();
     }
 
+    var fav = function () {
+        var movieId = $('.movie-info').attr('movieId');
+        var userId = auth.getAuth().id;
+
+        if($(this).hasClass('selected')) {
+            remote.removeFromFav(userId, movieId)
+        }
+        else {
+            remote.addToFav(userId, movieId)
+        }
+    }
+
+    var watch = function () {
+        var movieId = $('.movie-info').attr('movieId');
+        var userId = auth.getAuth().id;
+
+        if($(this).hasClass('selected')) {
+            remote.removeFromWatchlist(userId, movieId)
+        }
+        else {
+            remote.addToWatchlist(userId, movieId)
+        }
+    }
+
     function preventDefault(e) {
         if (e) {
             e.preventDefault();
@@ -149,7 +174,9 @@ var app = (() => {
         submit,
         home,
         getMovieView,
-        getProfileView
+        getProfileView,
+        fav,
+        watch
     }
 })();
 

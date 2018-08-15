@@ -116,6 +116,8 @@ var show = (() => {
                 $content.empty();
                 $content.append($html);
                 $('.button-list li a').on('click', app.getProfileView)
+                $('.add-to-fav').on('click', app.fav)
+                $('.add-to-watchlist').on('click', app.watch)
             },
             error: () => {
                 var err = "Could not load movie page";

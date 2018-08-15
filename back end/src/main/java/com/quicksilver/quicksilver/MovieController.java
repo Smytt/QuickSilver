@@ -24,7 +24,6 @@ public class MovieController {
     @GetMapping(value = "/{id}")
     public Movie getById(@PathVariable(name = "id") int id) {
         Movie movie = movieService.findById(id);
-        System.out.println(movie.getFavedBy().size());
         return movie;
     }
 

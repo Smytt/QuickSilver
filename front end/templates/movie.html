@@ -1,10 +1,14 @@
 <div class="poster"
      style="background-image: url({{poster}})"></div>
-<div class="movie-info">
+<div class="movie-info" movieId="{{id}}">
     <h1>{{title}}</h1>
     <h2>{{year}}</h2>
-    <button><i class="fas fa-star"></i><span>favorites</span></button>
-    <button class="selected"><i class="fas fa-play-circle"></i><span>watchlist</span></button>
+
+    {{#isAuth}}
+    <button class="add-to-fav {{#isFaved}}selected{{/isFaved}}"><i class="fas fa-star"></i><span>favorites</span></button>
+    <button class="add-to-watchlist {{#isInWatchlist}}selected{{/isInWatchlist}}"><i class="fas fa-play-circle"></i><span>watchlist</span></button>
+    {{/isAuth}}
+
     <p>{{summary}}</p>
 
 

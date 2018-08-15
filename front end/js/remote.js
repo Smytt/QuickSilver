@@ -50,7 +50,6 @@ remote = (() => {
             type: 'GET',
             url: base + "/movie/" + id,
             success: (res) => {
-                console.log(res);
                 render.movieInfo(res);
             },
             error: (e) => {
@@ -59,10 +58,47 @@ remote = (() => {
         })
     }
 
+    var addToFav = (userId, movieId) => {
+        $.ajax({
+            type: 'POST',
+            url: base + "/user/favorites/add",
+            data: JSON.stringify({
+                user: userId,
+                movie: movieId
+            }),
+            contentType: 'application/json',
+            success: () => {
+                getMovie(movieId);
+            },
+            error: (e) => {
+                console.log("Couldn't create new fav");
+            }
+        })
+    }
+
+    var removeFromFav = (userId, movieId) => {
+        $.ajax({
+            type: 'POST',
+            url: base + "/user/favorites/remove",
+            data: JSON.stringify({
+                user: userId,
+                movie: movieId
+            }),
+            contentType: 'application/json',
+            success: () => {
+                getMovie(movieId);
+            },
+            error: (e) => {
+                console.log("Couldn't remove fav");
+            }
+        })
+    }
     return {
         search,
         submit,
         getUser,
-        getMovie
+        getMovie,
+        addToFav,
+        removeFromFav
     }
 })()

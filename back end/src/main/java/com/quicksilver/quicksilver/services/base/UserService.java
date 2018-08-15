@@ -8,4 +8,8 @@ public interface UserService {
     User register(User user);
 
     User findByUsername(User user);
+
+    void addToFav(Integer userId, Integer movieId);
+
+    void removeFromFav(Integer userId, Integer movieId);
 }

@@ -8,6 +8,7 @@ var auth = (() => {
 
     var setAuth = function (res) {
         $('#profile').attr('userId', res['id'])
+        $('#profile').text(res['username'])
         sessionStorage.setItem("username", res['username']);
         sessionStorage.setItem("id", res['id']);
     }

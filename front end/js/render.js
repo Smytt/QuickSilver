@@ -1,6 +1,17 @@
 var render = (() => {
 
     var movieInfo = (movie) => {
+        movie['isAuth'] = auth.isAuth();
+        movie['isFaved'] = false;
+        movie['isInWatchlist'] = false;
+
+        if (movie['favedBy'].filter(x => x['id'] == auth.getAuth().id) != 0) {
+            movie['isFaved'] = true;
+        }
+        if (movie['inWatchlistOf'].filter(x => x['id'] == auth.getAuth().id) != 0) {
+            movie['isInWatchlist'] = true;
+        }
+
         show.movieView(movie);
     }
 
